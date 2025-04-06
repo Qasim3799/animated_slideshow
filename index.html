@@ -9,15 +9,15 @@
     }
 
     @keyframes flow-fade-in {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
 
     @keyframes fade-in {
         from {
@@ -126,11 +126,61 @@
     .next {
         left: 80px;
     }
+
+    /* MEDIA QUERY FOR SMALL SCREENS */
+    @media only screen and (max-width: 600px) {
+        body {
+            align-items: flex-start;
+            height: auto;
+            padding: 20px 0;
+        }
+
+        .slideshow-container {
+            height: 60vh;
+        }
+
+        .slide img {
+            height: 60vh;
+        }
+
+        .text-overlay {
+            bottom: 100px;
+            left: 20px;
+            font-size: 2.5rem;
+        }
+
+        .count {
+            bottom: 70px;
+            left: 30px;
+            font-size: 18px;
+        }
+
+        .count span {
+            font-size: 24px;
+        }
+
+        .progress-bar {
+            bottom: 55px;
+            left: 30px;
+            width: 70%;
+        }
+
+        .prev, .next {
+            bottom: 20px;
+            left: 30px;
+            font-size: 16px;
+        }
+
+        .next {
+            left: 70px;
+        }
+    }
 </style>
+
 
 <div class="slideshow-container">
     <div class="slide">
-        <img src="./img-lum1.webp" alt="Integrity">
+        <img src="https://files.secure.website/wscfus/10797405/32932110/img-lum1.webp" alt="Integrity">
         <div class="text-overlay">Ingenuity</div>
         <p class="count"><span>1</span>/4</p>
         <div class="progress-bar"><div class="progress" style="width:25%;"></div></div>
