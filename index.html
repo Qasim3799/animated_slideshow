@@ -1,232 +1,259 @@
-<style>
-    @keyframes scaled {
-        from {
-            transform: scale(1);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slideshow with Animated Scroll</title>
+    <style>
+        @keyframes scaled {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
         }
-        to {
-            transform: scale(1.2);
+
+        @keyframes flow-fade-in {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
-    }
 
-    @keyframes flow-fade-in {
-        from {
-            opacity: 0;
-            transform: translateX(-20px);
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        to {
-            opacity: 1;
-            transform: translateX(0);
+
+        @keyframes slideUpDown {
+            0% { justify-content: flex-start; }
+            100% { justify-content: flex-end; }
         }
-    }
 
-    @keyframes fade-in {
-        from {
-            opacity: 0;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
         }
-        to {
-            opacity: 1;
-        }
-    }
 
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-    }
-
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #f4f4f4;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .slideshow-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .slide {
-        display: none;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-    }
-
-    .slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transform: scale(1.2);
-        animation: scaled 3s ease-in-out 1 alternate;
-    }
-
-    .text-overlay {
-        position: absolute;
-        bottom: 200px;
-        left: 40px;
-        color: white;
-        padding: 10px 15px;
-        font-size: 5rem;
-        opacity: 0;
-        animation: flow-fade-in 0.6s ease forwards;
-    }
-
-    .count {
-        position: absolute;
-        bottom: 170px;
-        left: 60px;
-        color: grey;
-        font-size: 25px;
-    }
-
-    .count span {
-        animation: fade-in 1s ease-in-out;
-        display: inline-block;
-        font-size: 35px;
-        margin-right: 8px;
-        color: white;
-    }
-
-    .progress-bar {
-        position: absolute;
-        bottom: 150px;
-        left: 60px;
-        width: 400px;
-        height: 2px;
-        background: rgba(255, 255, 255, 0.3);
-        overflow: hidden;
-    }
-
-    .progress {
-        height: 100%;
-        background: white;
-    }
-
-    .prev, .next {
-        position: absolute;
-        bottom: 70px;
-        left: 50px;
-        color: white;
-        border: none;
-        cursor: pointer;
-        padding: 8px 12px;
-        font-size: 20px;
-        border-radius: 5px;
-        transition: 0.3s;
-        background-color: transparent;
-    }
-
-    .next {
-        left: 80px;
-    }
-
-    /* MEDIA QUERY FOR SMALL SCREENS */
-    @media only screen and (max-width: 600px) {
         body {
-            align-items: flex-start;
-            height: auto;
-            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
         }
 
         .slideshow-container {
-            height: 100vh;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
         }
 
         .slide img {
-            height: 100vh;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.2);
+            animation: scaled 3s ease-in-out 1 alternate;
         }
 
         .text-overlay {
-            bottom: 100px;
-            left: 20px;
-            font-size: 2.5rem;
+            position: absolute;
+            bottom: 200px;
+            left: 40px;
+            color: white;
+            padding: 10px 15px;
+            font-size: 5rem;
+            opacity: 0;
+            animation: flow-fade-in 0.6s ease forwards;
         }
 
         .count {
-            bottom: 70px;
-            left: 30px;
-            font-size: 18px;
+            position: absolute;
+            bottom: 170px;
+            left: 60px;
+            color: grey;
+            font-size: 25px;
         }
 
         .count span {
-            font-size: 24px;
+            animation: fade-in 1s ease-in-out;
+            display: inline-block;
+            font-size: 35px;
+            margin-right: 8px;
+            color: white;
         }
 
         .progress-bar {
-            bottom: 55px;
-            left: 30px;
-            width: 70%;
+            position: absolute;
+            bottom: 150px;
+            left: 60px;
+            width: 400px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: white;
         }
 
         .prev, .next {
-            bottom: 20px;
-            left: 30px;
-            font-size: 16px;
+            position: absolute;
+            bottom: 70px;
+            left: 50px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 8px 12px;
+            font-size: 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+            background-color: transparent;
         }
 
         .next {
-            left: 70px;
+            left: 80px;
         }
-    }
-</style>
 
+        /* HIDDEN BY DEFAULT */
+        #animated {
+            display: none;
+            border: 4px solid whitesmoke;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 80px;
+            width: 35px;
+            border-radius: 25px;
+            position: absolute;
+            bottom: 25vh;
+            left: 50%;
+            z-index: 10;
+            padding: 5px;
+            animation: slideUpDown 0.5s linear alternate infinite;
+        }
 
-<div class="slideshow-container">
-    <div class="slide">
-        <img src="https://files.secure.website/wscfus/10797405/32932110/img-lum1.webp" alt="Integrity">
-        <div class="text-overlay">Ingenuity</div>
-        <p class="count"><span>1</span>/4</p>
-        <div class="progress-bar"><div class="progress" style="width:25%;"></div></div>
+        /* SHOW ONLY ON MOBILE */
+        @media only screen and (max-width: 600px) {
+            body {
+                align-items: flex-start;
+                height: auto;
+                padding: 20px 0;
+            }
+
+            .slideshow-container {
+                height: 100vh;
+            }
+
+            .slide img {
+                height: 100vh;
+            }
+
+            .text-overlay {
+                bottom: 100px;
+                left: 20px;
+                font-size: 2.5rem;
+            }
+
+            .count {
+                bottom: 70px;
+                left: 30px;
+                font-size: 18px;
+            }
+
+            .count span {
+                font-size: 24px;
+            }
+
+            .progress-bar {
+                bottom: 55px;
+                left: 30px;
+                width: 70%;
+            }
+
+            .prev, .next {
+                bottom: 20px;
+                left: 30px;
+                font-size: 16px;
+            }
+
+            .next {
+                left: 70px;
+            }
+
+            #animated {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+        <div id="animated">
+            <div id="animated-slider" style="width: 80%; height: 15px; background-color: whitesmoke; border-radius: 25px;"></div>
+        </div>
+
+        <div class="slide">
+            <img src="https://files.secure.website/wscfus/10797405/32932110/img-lum1.webp" alt="Ingenuity">
+            <div class="text-overlay">Ingenuity</div>
+            <p class="count"><span>1</span>/4</p>
+            <div class="progress-bar"><div class="progress" style="width:25%;"></div></div>
+        </div>
+
+        <div class="slide">
+            <img src="https://files.secure.website/wscfus/10797405/32932169/pexels-guiirossi-1686296.jpg" alt="Intelligence">
+            <div class="text-overlay">Intelligence</div>
+            <p class="count"><span>2</span>/4</p>
+            <div class="progress-bar"><div class="progress" style="width:50%;"></div></div>
+        </div>
+
+        <div class="slide">
+            <img src="https://images.pexels.com/photos/939729/pexels-photo-939729.jpeg?w=1920" alt="Wisdom">
+            <div class="text-overlay">Wisdom</div>
+            <p class="count"><span>3</span>/4</p>
+            <div class="progress-bar"><div class="progress" style="width:75%;"></div></div>
+        </div>
+
+        <div class="slide">
+            <img src="https://images.pexels.com/photos/33545/sunrise-phu-quoc-island-ocean.jpg?w=1920" alt="Patience">
+            <div class="text-overlay">Patience</div>
+            <p class="count"><span>4</span>/4</p>
+            <div class="progress-bar"><div class="progress" style="width:100%;"></div></div>
+        </div>
+
+        <button class="prev" onclick="changeSlide(-1)">❮</button>
+        <button class="next" onclick="changeSlide(1)">❯</button>
     </div>
-    <div class="slide">
-        <img src="https://files.secure.website/wscfus/10797405/32932169/pexels-guiirossi-1686296.jpg" alt="Intelligence">
-        <div class="text-overlay">Intelligence</div>
-        <p class="count"><span>2</span>/4</p>
-        <div class="progress-bar"><div class="progress" style="width:50%;"></div></div>
-    </div>
-    <div class="slide">
-        <img src="https://images.pexels.com/photos/939729/pexels-photo-939729.jpeg?w=1920" alt="Excellence">
-        <div class="text-overlay">Wisdom</div>
-        <p class="count"><span>3</span>/4</p>
-        <div class="progress-bar"><div class="progress" style="width:75%;"></div></div>
-    </div>
-    <div class="slide">
-        <img src="https://images.pexels.com/photos/33545/sunrise-phu-quoc-island-ocean.jpg?w=1920" alt="Perfection">
-        <div class="text-overlay">Patience</div>
-        <p class="count"><span>4</span>/4</p>
-        <div class="progress-bar"><div class="progress" style="width:100%;"></div></div>
-    </div>
 
-    <button class="prev" onclick="changeSlide(-1)">❮</button>
-    <button class="next" onclick="changeSlide(1)">❯</button>
-</div>
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll(".slide");
 
-<script>
-    let slideIndex = 0;
-    const slides = document.querySelectorAll(".slide");
+        function showSlide(index) {
+            slides.forEach(slide => slide.style.display = "none");
+            slides[index].style.display = "block";
+        }
 
-    function showSlide(index) {
-        slides.forEach(slide => slide.style.display = "none");
-        slides[index].style.display = "block";
-    }
+        function changeSlide(step) {
+            slideIndex = (slideIndex + step + slides.length) % slides.length;
+            showSlide(slideIndex);
+        }
 
-    function changeSlide(step) {
-        slideIndex = (slideIndex + step + slides.length) % slides.length;
+        function autoSlide() {
+            changeSlide(1);
+            setTimeout(autoSlide, 3000);
+        }
+
         showSlide(slideIndex);
-    }
-
-    function autoSlide() {
-        changeSlide(1);
         setTimeout(autoSlide, 3000);
-    }
-
-    showSlide(slideIndex);
-    setTimeout(autoSlide, 3000);
-</script>
+    </script>
+</body>
+</html>
